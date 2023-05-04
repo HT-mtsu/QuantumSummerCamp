@@ -1,1 +1,73 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Qiskit Code Example</title>
+</head>
+<body>
+  <h1>Single Gate Qiskit Code Example</h1>
+
+  <p>This example shows how to create and run a single qubit gate using Qiskit.</p>
+
+  <div>
+    <label for="gate-selector">Select a gate:</label>
+    <select id="gate-selector">
+      <option value="x">X gate</option>
+      <option value="y">Y gate</option>
+      <option value="z">Z gate</option>
+      <option value="h">Hadamard gate</option>
+    </select>
+    <button id="run-button">Run</button>
+  </div>
+
+  <h2>Results</h2>
+  <pre id="output"></pre>
+
+  <script src="https://unpkg.com/qiskit"></script>
+  <script>
+    // Define the circuit
+    const circuit = new qiskit.QuantumCircuit(1);
+    const qubit = circuit.qubits[0];
+
+    // Define the gate selector and run button
+    const gateSelector = document.querySelector("#gate-selector");
+    const runButton = document.querySelector("#run-button");
+
+    // Define the output element
+    const output = document.querySelector("#output");
+
+    // Define the run function
+    function run() {
+      // Get the selected gate value
+      const selectedGate = gateSelector.value;
+
+      // Apply the selected gate to the qubit
+      switch (selectedGate) {
+        case "x":
+          qubit.x();
+          break;
+        case "y":
+          qubit.y();
+          break;
+        case "z":
+          qubit.z();
+          break;
+        case "h":
+          qubit.h();
+          break;
+      }
+
+      // Simulate the circuit and get the counts
+      const backend = new qiskit.BasicAerBackend("qasm_simulator");
+      const job = qiskit.execute(circuit, backend);
+      job.result().getCounts().then(counts => {
+        output.textContent = JSON.stringify(counts, null, 2);
+      });
+    }
+
+    // Add event listener to run button
+    runButton.addEventListener("click", run);
+  </script>
+</body>
+</html>
