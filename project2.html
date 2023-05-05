@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Quantum Circuit Example</title>
+    <!-- Import the Qiskit CSS -->
+    <link rel="stylesheet" href="https://quantum-computing.ibm.com/static/css/main.css">
+    <!-- Import the Qiskit JavaScript SDK -->
+    <script src="https://quantum-computing.ibm.com/sdk/javascript/sdk-0.9.5.js"></script>
+  </head>
+  <body>
+    <h1>Quantum Circuit Example</h1>
+    <div id="circuit-composer"></div>
+    <div id="script"></div>
+    <button id="run-button">Run</button>
+    <div id="output"></div>
+    <!-- Initialize the Qiskit JavaScript SDK -->
+    <script>
+      IBMQuantum.IBMQ.loadAccount('YOUR_API_KEY')
+        .then(() => {
+          const composer = new IBMQuantum.CircuitComposer('circuit-composer', {
+            qubits: 2,
+            name: 'My Quantum Circuit'
+          });
+          composer.addGate({name: 'x', qubits: [0]});
+          composer.addGate({name: 'cx', qubits: [0, 1]});
+          const script = composer.exportAsScript();
+          document.getElementById('script').textContent = script;
+          const runButton = document.getElementById('run-button');
+          const output = document.getElementById('output');
+          runButton.addEventListener('click', async () => {
+            const backend = await IBMQuantum.getBackend('ibmq_qasm_simulator');
+            const job = await IBMQuantum.execute(script, backend);
+            const result = await job.result();
+            const counts = result.getCounts();
+            output.textContent = JSON.stringify(counts);
+          });
+        });
+    </script>
+  </body>
+</html>
