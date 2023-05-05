@@ -4,26 +4,40 @@
     <title>Interactive Quiz</title>
   </head>
   <body>
-    <h1>Practice Questions</h1>
-    <h2>Ancilla practice</h2>
-    <p>2 points possible (graded)</p>
-    <form id="quiz">
-      <p>1. A function with 4 inputs and 2 outputs can be reversible.</p>
-      <label><input type="radio" name="q1" value="true"> True</label><br>
-      <label><input type="radio" name="q1" value="false"> False</label><br><br>
-      <button type="button" onclick="submitQuiz()">Submit</button>
-    </form>
-    <div id="output"></div>
+    <h1>Interactive Quiz</h1>
+    
+    <h2>Practice Questions</h2>
+    <h3>Ancilla practice</h3>
+    <p>For each statement, choose whether it is true or false.</p>
+    <p>A function with 4 inputs and 2 outputs can be reversible.</p>
+    <label><input type="radio" name="q1" value="true">True</label><br>
+    <label><input type="radio" name="q1" value="false">False</label><br><br>
+
+    <h3>Quantum circuit practice</h3>
+    <p>What is the output of the following quantum circuit?</p>
+    <img src="https://i.stack.imgur.com/Rwexl.png" alt="Quantum circuit" style="width:200px;height:150px;">
+    <br><br>
+    <label><input type="radio" name="q2" value="00">00</label><br>
+    <label><input type="radio" name="q2" value="01">01</label><br>
+    <label><input type="radio" name="q2" value="10">10</label><br>
+    <label><input type="radio" name="q2" value="11">11</label><br><br>
+
+    <button onclick="submitQuiz()">Submit</button>
+    <br><br>
+    <div id="result"></div>
+
     <script>
       function submitQuiz() {
-        var form = document.getElementById("quiz");
-        var q1 = form.elements["q1"].value;
-        var score = 0;
-        if (q1 === "true") {
-          score += 2;
+        var correctAnswers = 0;
+        var q1Answer = document.querySelector('input[name="q1"]:checked').value;
+        if (q1Answer === "true") {
+          correctAnswers++;
         }
-        var output = document.getElementById("output");
-        output.innerHTML = "Your score is: " + score;
+        var q2Answer = document.querySelector('input[name="q2"]:checked').value;
+        if (q2Answer === "11") {
+          correctAnswers++;
+        }
+        document.getElementById("result").innerHTML = "You got " + correctAnswers + " out of 2 questions correct!";
       }
     </script>
   </body>
