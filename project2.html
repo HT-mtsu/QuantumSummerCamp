@@ -1,35 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ED Calculation for Tight-Binding Model</title>
+    <title>Hello, World!</title>
   </head>
   <body>
-    <h1>ED Calculation for Tight-Binding Model</h1>
+    <h1>Hello, World!</h1>
+    
     <h2>Python Script</h2>
     <pre><code>
-      # Import necessary libraries
-      import numpy as np
-      from numpy import linalg as LA
-      
-      # Define parameters
-      t = 1.0
-      L = 10
-      H = np.zeros((L,L))
-      np.fill_diagonal(H, -2*t)
-      np.fill_diagonal(H[1:], t)
-      np.fill_diagonal(H[:,1:], t)
-      H[0,-1] = t
-      H[-1,0] = t
-      
-      # Diagonalize the Hamiltonian
-      eigvals, eigvecs = LA.eigh(H)
-      print('Eigenvalues: {}'.format(eigvals))
+      # Define a function to print "Hello, world!"
+      def hello_world():
+          print("Hello, world!")
+          
+      # Call the function
+      hello_world()
     </code></pre>
     
     <h2>Interactive Code Block</h2>
     <button onclick="runCode()">Run</button>
     <br/><br/>
-    <textarea id="code" rows="10" cols="80"></textarea>
+    <textarea id="code" rows="10" cols="80">
+      # Enter your code here
+      hello_world()
+    </textarea>
     <br/><br/>
     <div id="output"></div>
     
@@ -41,10 +34,15 @@
         // Execute the code and display the output
         try {
           var output = eval(code);
-          document.getElementById("output").innerHTML = "Eigenvalues: " + output;
+          document.getElementById("output").innerHTML = "Output: " + output;
         } catch (err) {
           document.getElementById("output").innerHTML = "Error: " + err.message;
         }
+      }
+      
+      // Define the hello_world function
+      function hello_world() {
+        console.log("Hello, world!");
       }
     </script>
   </body>
