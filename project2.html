@@ -22,8 +22,7 @@
             qubits: 2,
             name: 'My Quantum Circuit'
           });
-          composer.addGate({name: 'x', qubits: [0]});
-          composer.addGate({name: 'cx', qubits: [0, 1]});
+          composer.addGate({name: 'h', qubits: [0]});
           const script = composer.exportAsScript();
           document.getElementById('script').textContent = script;
           const runButton = document.getElementById('run-button');
