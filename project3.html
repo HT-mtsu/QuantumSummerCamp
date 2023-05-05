@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ED Calculation for Tight-Binding Model</title>
+  </head>
+  <body>
+    <h1>ED Calculation for Tight-Binding Model</h1>
+    <h2>Python Script</h2>
+    <pre><code>
+      # Import necessary libraries
+      import numpy as np
+      from numpy import linalg as LA
+      
+      # Define parameters
+      t = 1.0
+      L = 10
+      H = np.zeros((L,L))
+      np.fill_diagonal(H, -2*t)
+      np.fill_diagonal(H[1:], t)
+      np.fill_diagonal(H[:,1:], t)
+      H[0,-1] = t
+      H[-1,0] = t
+      
+      # Diagonalize the Hamiltonian
+      eigvals, eigvecs = LA.eigh(H)
+      console.log('Eigenvalues: ' + eigvals);
+    </code></pre>
+    
+    <h2>Interactive Code Block</h2>
+    <button onclick="runCode()">Run</button>
+    <br/><br/>
+    <textarea id="code" rows="10" cols="80">
+      # Enter your code here
+    </textarea>
+    <br/><br/>
+    <div id="output"></div>
+    
+    <script>
+      function runCode() {
+        // Get the code from the textarea
+        var code = document.getElementById("code").value;
+        
+        // Execute the code and display the output
+        try {
+          var output = eval(code);
+          document.getElementById("output").innerHTML = "Eigenvalues: " + output;
+        } catch (err) {
+          document.getElementById("output").innerHTML = "Error: " + err.message;
+        }
+      }
+    </script>
+  </body>
+</html>
