@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>Quantum Circuit Example</title>
-    <!-- Import the Qiskit CSS -->
-    <link rel="stylesheet" href="https://quantum-computing.ibm.com/static/css/main.css">
-    <!-- Import the Qiskit JavaScript SDK -->
-    <script src="https://quantum-computing.ibm.com/sdk/javascript/sdk-0.9.5.js"></script>
+    <title>ED Calculation for Tight-Binding Model</title>
   </head>
   <body>
-    <h1>Quantum Circuit Example</h1>
-    <div id="circuit-composer"></div>
-    <div id="script"></div>
-    <button id="run-button">Run</button>
+    <h1>ED Calculation for Tight-Binding Model</h1>
+    <h2>Python Script</h2>
+    <pre><code>
+      # Import necessary libraries
+      import numpy as np
+      from numpy import linalg as LA
+      
+      # Define parameters
+      t = 1.0
+      L = 10
+      H = np.zeros((L,L))
+      np.fill_diagonal(H, -2*t)
+      np.fill_diagonal(H[1:], t)
+      np.fill_diagonal(H[:,1:], t)
+      H[0,-1] = t
+      H[-1,0] = t
+      
+      # Diagonalize the Hamiltonian
+      eigvals, eigvecs = LA.eigh(H)
+      print('Eigenvalues: {}'.format(eigvals))
+    </code></pre>
+    
+    <h2>Interactive Code Block</h2>
+    <button onclick="runCode()">Run</button>
+    <br/><br/>
+    <textarea id="code" rows="10" cols="80">
+      # Enter your code here
+    </textarea>
+    <br/><br/>
     <div id="output"></div>
-    <!-- Initialize the Qiskit JavaScript SDK -->
+    
     <script>
-      IBMQuantum.IBMQ.loadAccount('YOUR_API_KEY')
-        .then(() => {
-          const composer = new IBMQuantum.CircuitComposer('circuit-composer', {
-            qubits: 2,
-            name: 'My Quantum Circuit'
-          });
-          composer.addGate({name: 'h', qubits: [0]});
-          const script = composer.exportAsScript();
-          document.getElementById('script').textContent = script;
-          const runButton = document.getElementById('run-button');
-          const output = document.getElementById('output');
-          runButton.addEventListener('click', async () => {
-            const backend = await IBMQuantum.getBackend('ibmq_qasm_simulator');
-            const job = await IBMQuantum.execute(script, backend);
-            const result = await job.result();
-            const counts = result.getCounts();
-            output.textContent = JSON.stringify(counts);
-          });
-        });
+      function runCode() {
+        // Get the code from the textarea
+        var code = document.getElementById("code").value;
+        
+        // Execute the code and display the output
+        try {
+          var output = eval(code);
+          document.getElementById("output").innerHTML = "Eigenvalues: " + output;
+        } catch (err) {
+          document.getElementById("output").innerHTML = "Error: " + err.message;
+        }
+      }
     </script>
   </body>
 </html>
