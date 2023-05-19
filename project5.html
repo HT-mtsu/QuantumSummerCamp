@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quantum Animation</title>
+</head>
+<body>
+<canvas id="canvas" width="500" height="500"></canvas>
+<script>
+var ctx = document.getElementById("canvas").getContext("2d");
+
+// Create a function to draw the animation
+function draw() {
+  // Clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw the photon
+  ctx.beginPath();
+  ctx.arc(250, 250, 50, 0, Math.PI * 2);
+  ctx.fillStyle = "red";
+  ctx.fill();
+
+  // Draw the electron spin
+  ctx.beginPath();
+  ctx.arc(100, 100, 25, 0, Math.PI * 2);
+  ctx.fillStyle = "blue";
+  ctx.fill();
+
+  // Update the animation
+  requestAnimationFrame(draw);
+}
+
+// Start the animation
+draw();
+</script>
+</body>
+</html>
