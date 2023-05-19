@@ -74,6 +74,23 @@ function update() {
 
   // Update the temperature label
   document.getElementById("temperature-label").innerHTML = "Temperature: " + temperature;
+
+  // Update the simulation box
+  var simulationBox = document.getElementById("canvas");
+  var simulationImage = simulationBox.querySelector("canvas");
+  var simulationImageData = simulationImage.getContext("2d").getImageData(0, 0, simulationImage.width, simulationImage.height);
+  for (var i = 0; i < simulationImageData.data.length; i += 4) {
+    if (lattice[i / 4] == 1) {
+      simulationImageData.data[i] = 255;
+      simulationImageData.data[i + 1] = 0;
+      simulationImageData.data[i + 2] = 0;
+    } else {
+      simulationImageData.data[i] = 0;
+      simulationImageData.data[i + 1] = 0;
+      simulationImageData.data[i + 2] = 255;
+    }
+  }
+  simulationImage.getContext("2d").putImageData(simulationImageData, 0, 0);
 }
 
 // Start the simulation
@@ -81,6 +98,3 @@ draw();
 
 // Update the simulation when the temperature changes
 document.getElementById("temperature").addEventListener("input", update);
-</script>
-</body>
-</html>
