@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ising Model</title>
+</head>
+<body>
+<canvas id="canvas" width="500" height="500"></canvas>
+<script>
+var ctx = document.getElementById("canvas").getContext("2d");
+
+// Create a function to draw the simulation
+function draw() {
+  // Clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw the lattice
+  for (var i = 0; i < canvas.width; i++) {
+    for (var j = 0; j < canvas.height; j++) {
+      var x = i * 2;
+      var y = j * 2;
+
+      // Draw a black square if the spin is up, and a white square if the spin is down
+      if (lattice[i][j] == 1) {
+        ctx.fillStyle = "black";
+      } else {
+        ctx.fillStyle = "white";
+      }
+
+      ctx.fillRect(x, y, 2, 2);
+    }
+  }
+
+  // Update the simulation
+  requestAnimationFrame(draw);
+}
+
+// Initialize the simulation
+var lattice = [];
+for (var i = 0; i < canvas.width; i++) {
+  var row = [];
+  for (var j = 0; j < canvas.height; j++) {
+    row.push(Math.round(Math.random()));
+  }
+  lattice.push(row);
+}
+
+// Start the simulation
+draw();
+</script>
+</body>
+</html>
