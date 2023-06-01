@@ -1,0 +1,10 @@
+#+TITLE: Monte-Carlo Simulations of the 2-D Ising Model
+#+AUTHOR: Prateek Mehta and Hui Li
+#+DATE: \today
+#+LATEX_CLASS: cmu-article
+#+OPTIONS: ^:{}
+#+OPTIONS: toc:nil
+#+OPTIONS: tex:t
+
+\maketitle
+\tableofcontents
