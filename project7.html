@@ -31,6 +31,9 @@ function animate() {
     radius = 0;
   }
 
+  // Draw the circle with the new radius
+  drawCircle(canvas.width / 2, canvas.height / 2, radius);
+
   // Schedule the next animation frame
   window.requestAnimationFrame(animate);
 }
