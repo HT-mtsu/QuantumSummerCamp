@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quantum Computing Animation</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.12.0/p5.min.js"></script>
+</head>
+<body>
+<canvas id="canvas" width="500" height="500"></canvas>
+<script>
+var canvas = document.getElementById("canvas");
+var qubit = {
+  state: 0.5,
+  angle: 0
+};
+
+function animateOneOperator() {
+  // Clear the canvas
+  canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw the qubit
+  drawQubit(canvas, qubit);
+
+  // Perform the operation
+  switch (qubit.operation) {
+    case "X":
+      rotateQubit(canvas, qubit, Math.PI);
+      break;
+    case "Y":
+      rotateQubit(canvas, qubit, Math.PI / 2);
+      break;
+    case "Z":
+      rotateQubit(canvas, qubit, Math.PI * 2);
+      break;
+    case "S":
+      phaseQubit(canvas, qubit, Math.PI / 2);
+      break;
+  }
+}
+
+function animateTwoOperators() {
+  // Clear the canvas
+  canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw the qubit
+  drawQubit(canvas, qubit);
+
+  // Perform the first operation
+  animateOneOperator();
+
+  // Perform the second operation
+  animateOneOperator();
+}
+
+function animateThreeOperators() {
+  // Clear the canvas
+  canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw the qubit
+  drawQubit(canvas, qubit);
+
+  // Perform the first operation
+  animateOneOperator();
+
+  // Perform the second operation
+  animateOneOperator();
+
+  // Perform the third operation
+  animateOneOperator();
+}
+
+function drawQubit(canvas, qubit) {
+  // Get the canvas context
+  var ctx = canvas.getContext("2d");
+
+  // Draw the qubit state
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Draw the arrow representing the qubit state
+  ctx.fillStyle = "white";
+  ctx.beginPath();
+  ctx.moveTo(canvas.width / 2, canvas.height / 2);
+  ctx.lineTo(canvas.width / 2, qubit.state * canvas.height / 2);
+  ctx.stroke();
+}
+
+function rotateQubit(canvas, qubit, angle) {
+  // Get the canvas context
+  var ctx = canvas.getContext("2d");
+
+  // Translate the qubit to the origin
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+
+  // Rotate the qubit
+  ctx.rotate(angle);
+
+  // Translate the qubit back to its original position
+  ctx.restore();
+}
+
+function phaseQubit(canvas, qubit, angle) {
+  // Get the canvas context
+  var ctx = canvas.getContext("2d");
+
+  // Multiply the qubit state by e^(i*angle)
+  qubit.state = Math.cos(angle) + Math.sin(angle) * qubit.state;
+
+  // Draw the qubit
+  drawQubit(canvas, qubit);
+}
+
+// Start the animation
+window.onload = function() {
+  animateOneOperator();
+};
+</script>
+</body>
+</html>
