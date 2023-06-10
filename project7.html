@@ -37,37 +37,6 @@ function animateOneOperator() {
   }
 }
 
-function animateTwoOperators() {
-  // Clear the canvas
-  canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-
-  // Draw the qubit
-  drawQubit(canvas, qubit);
-
-  // Perform the first operation
-  animateOneOperator();
-
-  // Perform the second operation
-  animateOneOperator();
-}
-
-function animateThreeOperators() {
-  // Clear the canvas
-  canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-
-  // Draw the qubit
-  drawQubit(canvas, qubit);
-
-  // Perform the first operation
-  animateOneOperator();
-
-  // Perform the second operation
-  animateOneOperator();
-
-  // Perform the third operation
-  animateOneOperator();
-}
-
 function drawQubit(canvas, qubit) {
   // Get the canvas context
   var ctx = canvas.getContext("2d");
@@ -112,7 +81,12 @@ function phaseQubit(canvas, qubit, angle) {
 
 // Start the animation
 window.onload = function() {
-  animateOneOperator();
+  for (var i = 0; i < 100; i++) {
+    animateOneOperator();
+    setTimeout(function() {
+      animateOneOperator();
+    }, 200);
+  }
 };
 </script>
 </body>
