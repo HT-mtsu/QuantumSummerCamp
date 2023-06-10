@@ -21,10 +21,10 @@ function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Draw a circle
-  drawCircle(canvas.width / 2, canvas.height / 2, 100);
+  drawCircle(canvas.width / 2, canvas.height / 2, radius);
 
   // Increment the radius
-  var radius = radius + 1;
+  radius = radius + 1;
 
   // If the radius is greater than the canvas width, reset it to 0
   if (radius > canvas.width) {
