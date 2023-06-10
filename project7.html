@@ -1,93 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Quantum Computing Animation</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.12.0/p5.min.js"></script>
+<title>Simple Animation</title>
 </head>
 <body>
 <canvas id="canvas" width="500" height="500"></canvas>
+<button id="play">Play</button>
 <script>
 var canvas = document.getElementById("canvas");
-var qubit = {
-  state: 0.5,
-  angle: 0
-};
+var ctx = canvas.getContext("2d");
 
-function animateOneOperator() {
-  // Clear the canvas
-  canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-
-  // Draw the qubit
-  drawQubit(canvas, qubit);
-
-  // Perform the operation
-  switch (qubit.operation) {
-    case "X":
-      rotateQubit(canvas, qubit, Math.PI);
-      break;
-    case "Y":
-      rotateQubit(canvas, qubit, Math.PI / 2);
-      break;
-    case "Z":
-      rotateQubit(canvas, qubit, Math.PI * 2);
-      break;
-    case "S":
-      phaseQubit(canvas, qubit, Math.PI / 2);
-      break;
-  }
-}
-
-function drawQubit(canvas, qubit) {
-  // Get the canvas context
-  var ctx = canvas.getContext("2d");
-
-  // Draw the qubit state
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  // Draw the arrow representing the qubit state
-  ctx.fillStyle = "white";
+function drawCircle(x, y, radius) {
   ctx.beginPath();
-  ctx.moveTo(canvas.width / 2, canvas.height / 2);
-  ctx.lineTo(canvas.width / 2, qubit.state * canvas.height / 2);
-  ctx.stroke();
+  ctx.arc(x, y, radius, 0, 2 * Math.PI);
+  ctx.fill();
 }
 
-function rotateQubit(canvas, qubit, angle) {
-  // Get the canvas context
-  var ctx = canvas.getContext("2d");
+function animate() {
+  // Clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Translate the qubit to the origin
-  ctx.save();
-  ctx.translate(canvas.width / 2, canvas.height / 2);
+  // Draw a circle
+  drawCircle(canvas.width / 2, canvas.height / 2, 100);
 
-  // Rotate the qubit
-  ctx.rotate(angle);
+  // Increment the radius
+  var radius = radius + 1;
 
-  // Translate the qubit back to its original position
-  ctx.restore();
-}
+  // If the radius is greater than the canvas width, reset it to 0
+  if (radius > canvas.width) {
+    radius = 0;
+  }
 
-function phaseQubit(canvas, qubit, angle) {
-  // Get the canvas context
-  var ctx = canvas.getContext("2d");
-
-  // Multiply the qubit state by e^(i*angle)
-  qubit.state = Math.cos(angle) + Math.sin(angle) * qubit.state;
-
-  // Draw the qubit
-  drawQubit(canvas, qubit);
+  // Schedule the next animation frame
+  window.requestAnimationFrame(animate);
 }
 
 // Start the animation
-window.onload = function() {
-  for (var i = 0; i < 100; i++) {
-    animateOneOperator();
-    setTimeout(function() {
-      animateOneOperator();
-    }, 200);
-  }
-};
+window.addEventListener("load", animate);
+
+// Handle the "Play" button click
+document.getElementById("play").addEventListener("click", function() {
+  animate();
+});
 </script>
 </body>
 </html>
