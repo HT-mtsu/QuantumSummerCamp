@@ -590,14 +590,32 @@ Proceed 1.5 miles and turn left onto Old Main Circle (MTSU entrance).
 <section class="floor floor-2" id="Pictures">
 	<div class="inner">
 	<h2>Pictures</h2>
-<!-- Slides -->
-    <div class="carousel-inner">
-      <style>
+
+<style>
 * {
   box-sizing: border-box;
 }
 
 .column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+
+		      <style>
+* {
+  box-sizing: border-box;
+}
+
+.column2 {
   float: left;
   width: 33.33%;
   padding: 5px;
@@ -626,16 +644,16 @@ Proceed 1.5 miles and turn left onto Old Main Circle (MTSU entrance).
   </div>
  </div>
 	<div class="row">
-	 <div class="column">
+	 <div class="column2">
     <img src=" qc8-bids.jpeg" alt="Mountains" style="width:100%">
   </div>
 	  </div>
-	 <div class="column">
+	 <div class="column2">
     <img src=" qc9-hat.jpeg" alt="Mountains" style="width:100%">  
   </div>
 
 	  </div>
-	 <div class="column">
+	 <div class="column2">
     <img src=" 6-2.png" alt="Mountains" style="width:100%">  
   </div>
   
