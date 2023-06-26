@@ -592,25 +592,41 @@ Proceed 1.5 miles and turn left onto Old Main Circle (MTSU entrance).
 		<h2>Pictures</h2>
 <!-- Slides -->
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="Naseri.png" alt="Image 1">
-      </div>
-      <div class="carousel-item">
-        <img src="Physics.png" alt="Image 2">
-      </div>
-      <div class="carousel-item">
-        <img src="Terletska.png" alt="Image 3">
-      </div>
-	    
-    </div>
+      <style>
+* {
+  box-sizing: border-box;
+}
 
-    <!-- Controls -->
-    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </a>
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+
+ <h2>Images Side by Side</h2>
+<p>How to create side-by-side images with the CSS float property:</p>
+
+<div class="row">
+  <div class="column">
+    <img src="Naseri.png" alt="Snow" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="Physics.png" alt="Forest" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="Naseri.png" alt="Mountains" style="width:100%">
+  </div>
+</div>
+
+	    
   </div>
 
 <!-- Add Bootstrap JS and jQuery -->
